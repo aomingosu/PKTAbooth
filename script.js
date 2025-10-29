@@ -47,12 +47,12 @@ const I18N = {
     "menu.sticker": "・ステッカー　を　つくりたい　ひとは　こちら",
     "menu.illustration": "・イラスト　を　おくってくれる　かたは　こちら",
     "about.title": "・PKTA　とは？",
-    "about.body": "ご持参いただいたイラストをもとに、その場でオリジナルステッカーを作れるブースです。<br>デザインはプロのデザイナー青み と ほろ が担当し、文字入れやレイアウトをしてプリント・裁断してお渡しします。<br>完全非営利で運営しています。世界にひとつだけの記念ステッカーを楽しんでください！",
+    "about.body": "ネス使いのMOTHER2ファン、青みとほろが組んだサークルです。<br>スマブラコミュニティ大会で、様々な方にご提供していただいたイラストをもとに、その場で世界に1枚だけのオリジナルステッカーを作れるブースを出展しています。<br>デザイナーの青み・ほろがその場で文字入れやレイアウトをしてプリント・裁断してお渡しします。<br>完全非営利で運営しています。大会の記念に、ぜひステッカーを楽しんでください！",
     "members.title": "・メンバー　しょうかい",
     "member.aomi.name": "青み",
     "member.aomi.desc": "色々なクリエイティブをやっている。<br>漫画(スマブラ学園SP)、イラスト、デザイン、Webデザイン、3DCGモデリング、Unityなどを幅広くできる。<br>好きなゲームはSSBU、LOL、APEX、VRCなど。<br>友達が欲しい。",
     "member.horo.name": "ほろ",
-    "member.horo.desc": "カメラマン兼デザイナー。<br>ネスとエンダーマンとプリンを愛している。<br>旅行と東方と植物が好き。<br>好きなエレクトロプランクトンはマリンスノー。",
+    "member.horo.desc": "カメラマン兼デザイナー。<br>ネスとエンダーマンとプリンを愛している。<br>旅行と東方と植物が好き。<br>好きなゲームが多すぎるタイプ。<br>好きなエレクトロプランクトンはマリンスノー。",
     "member.portfolio": "ポートフォリオ",
     "nav.make": "ステッカーをつくる",
     "nav.post": "イラストをとうこうする",
@@ -61,15 +61,15 @@ const I18N = {
   },
   en: {
     "menu.title": "Quick Menu",
-    "menu.sticker": "For those who want to make a sticker",
-    "menu.illustration": "For those who want to send illustrations",
+    "menu.sticker": "Make a Sticker",
+    "menu.illustration": "Send Your Illustration",
     "about.title": "What is PKTA?",
-    "about.body": "Bring your illustration and we’ll make a one-and-only sticker on the spot!<br>Our designers Aomi and Horo handle layout, lettering, printing and trimming.<br>We operate completely non-profit. Enjoy your memorable sticker!",
+    "about.body": "PKTA is a circle formed by Aomi and Horo—EarthBound (MOTHER 2) fans who main Ness.<br>At community Super Smash Bros. tournaments, we run a booth where you can create a one-of-a-kind sticker on the spot using illustrations kindly provided by participants.<br>Designers Aomi and Horo will add text, arrange the layout, then print and cut it right there for you.<br>This project is entirely non-profit—please enjoy making a commemorative sticker for the event!",
     "members.title": "Members",
     "member.aomi.name": "Aomi",
-    "member.aomi.desc": "A versatile creator.<br>Works in comics (Smash Academy SP), illustration, design, web design, 3D modeling, and Unity.<br>Loves games like SSBU, LOL, APEX, and VRC.<br>Wants more friends.",
+    "member.aomi.desc": "A versatile creator.<br>Works in comics (Smash Academy SP), illustration, design, web design, 3D modeling, and Unity.<br>Loves games like SSBU, LoL, Apex, and VRC.<br>Wants more friends.",
     "member.horo.name": "Horo",
-    "member.horo.desc": "Photographer and designer.<br>Loves Ness, Enderman, and Jigglypuff.<br>Enjoys travel, Touhou, and plants.<br>Favorite Electroplankton is Marine Snow.",
+    "member.horo.desc": "Photographer and designer.<br>Loves Ness, Enderman, and Jigglypuff.<br>Enjoys travel, Touhou, and plants.<br>The type who likes too many games.<br>Favorite Electroplankton is Marine Snow.",
     "member.portfolio": "Portfolio",
     "nav.make": "Make a Sticker",
     "nav.post": "Submit Illustration",
@@ -77,6 +77,7 @@ const I18N = {
     "nav.members": "Members"
   }
 };
+
 
 // 既存の I18N に追記
 I18N.ja = {
