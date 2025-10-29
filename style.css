@@ -1,0 +1,672 @@
+/* ------------------------------------
+   おまじない
+------------------------------------ */
+@charset "UTF-8";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* ------------------------------------
+   フォント：見出し用 MOTHER PIXEL2
+   ※ 日本語が入っていない場合はフォールバック
+------------------------------------ */
+@font-face {
+  font-family: "MOTHER PIXEL2";
+  src: url("./fonts/MOTHERPIXEL2.otf") format("opentype"),
+       url("./fonts/MOTHERPIXEL2.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PixelMplus";
+  src: url("./fonts/PixelMplus12-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1, h2 ,h3{
+  font-family: "MOTHER PIXEL2", "PixelMplus", monospace;
+  font-weight: normal;
+}
+
+h2 {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  padding: 20px 20px 0px 20px;
+  font-family: "MOTHER PIXEL2", "PixelMplus", monospace;
+  font-weight: normal;
+  font-size: clamp(22px, 3vw, 28px);
+  letter-spacing: .1em;
+
+  border: 0 !important;          /* 競合回避 */
+  outline: 0 !important;         /* 競合回避 */
+  border-radius: 10px;           /* 角の丸み（お好みで調整） */
+
+  /* 中央：黒背景 → その外に白4px → さらに外に黒4px */
+  box-shadow: 0 0 0 4px #fff,     /* 内側の白囲み */
+              0 0 0 8px #000;     /* 外側の黒囲み（ずれなし） */
+}
+
+
+
+h4 {
+    font-size: x-large;
+}
+
+/* ------------------------------------
+   変数
+------------------------------------ */
+:root {
+  --bg: #ffffff;
+  --ink: #111;
+  --ink-dim: #545454;
+
+  --accent: #0a57ff;
+  --panel: #000;
+
+  --card: #0b0b0b;
+  --card-ink: #fff;
+
+  --radius: 14px;
+
+    --section-space: 150px;
+}
+
+/* ------------------------------------
+   ベース
+------------------------------------ */
+body {
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.8;
+  letter-spacing: .02em;
+  padding-top: 52px;
+}
+/* ------------------------------------
+   ヘッダー
+------------------------------------ */
+.site-header {
+  position: fixed;     /* 画面全体に追従 */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 16px;
+
+  /* 半透明背景 ＋ 背景のにじみ（ぼかし） */
+  background: rgba(239, 239, 239, 0.5);
+  backdrop-filter: blur(6px);             /* ← 下のコンテンツをぼかす */
+  -webkit-backdrop-filter: blur(6px);     /* Safari 用 */
+
+  border-bottom: 1px solid rgba(231, 231, 231, 0.6);
+}
+
+
+.logo img {
+  height: 50px;
+  display: block;
+}
+
+.burger {
+  --w: 24px;
+
+  width: var(--w);
+  height: var(--w);
+
+  border: 0;
+  background: transparent;
+
+  display: grid;
+  gap: 4px;
+
+  cursor: pointer;
+}
+
+.burger span {
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+}
+
+/* ------------------------------------
+   KV（白から画像へフェード）
+------------------------------------ */
+.kv {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+
+  background: #fff; /* 最初は白 */
+}
+
+/* 背景画像レイヤー：最初は非表示 → 徐々に表示 */
+.kv::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url(img/kv_kari_pc.jpg); /* PC用 */
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0;
+  animation: kvBgFade 3.0s ease-out forwards; /* ゆっくり */
+}
+
+/* スマホで画像差し替え */
+@media (max-width: 768px) {
+  .kv::before {
+    background-image: url(img/kv_kari_sp.jpg);
+  }
+}
+
+/* テキストは前面に */
+.kv-inner {
+  position: relative;
+  z-index: 1;
+
+  padding: 40px 20px;
+  text-align: left;
+  width: min(920px, 92vw);
+  margin: 0 auto;
+}
+
+@keyframes kvBgFade {
+  to { opacity: 1; }
+}
+
+/* アニメ苦手設定を尊重（任意） */
+@media (prefers-reduced-motion: reduce) {
+  .kv::before { animation: none; opacity: 1; }
+}
+
+/* 既存のタイトル装飾はそのまま */
+.kv-title {
+  font-size: clamp(28px, 6vw, 48px);
+  line-height: 1.6;
+}
+.kv-title span {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.3em 0.5em;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+}
+
+
+
+/* ------------------------------------
+   セクション共通
+------------------------------------ */
+.section {
+  width: min(1080px, 92vw);
+  margin: 0 auto;
+
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
+}
+
+.section-title {
+  font-size: clamp(22px, 3vw, 28px);
+  margin-bottom: 40px;
+}
+
+/* ------------------------------------
+   おいそぎメニュー
+------------------------------------ */
+.menu-cards {
+  display: grid;
+  gap: 18px;
+}
+
+.menu-card {
+  position: relative;
+
+  display: grid;
+  grid-template-rows: auto auto;
+
+  text-decoration: none;
+
+  background: var(--card);
+  color: var(--card-ink);
+
+  border-radius: var(--radius);
+  border: 4px solid #222;
+
+  overflow: hidden;
+
+  box-shadow: 0 6px 0 0 #0003;
+}
+
+.card-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-body {
+  padding: 16px 18px;
+}
+
+.card-title {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* PCでは2列 */
+@media (min-width: 768px) {
+  .menu-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .card-img {
+    height: 300px;
+  }
+}
+
+/* 画像ズーム（おいそぎメニュー） */
+.menu-card { overflow: hidden; }                 /* はみ出し防止 */
+.card-img { transition: transform .35s ease; }   /* なめらかに */
+.menu-card:hover .card-img { transform: scale(1.06); }
+
+/* アニメが苦手設定の端末では無効化（任意） */
+@media (prefers-reduced-motion: reduce) {
+  .card-img { transition: none; }
+  .menu-card:hover .card-img { transform: none; }
+}
+
+
+/* ------------------------------------
+   About（ブルー）
+------------------------------------ */
+.about-wrapper {
+  background: var(--accent);
+  color: #fff;
+  width: 100%;
+}
+
+.about {
+  text-align: left;
+  background: transparent;
+  border-radius: 0;
+  color: inherit;
+  width: min(1080px, 92vw);
+  margin: 0 auto;
+  padding: 100px 0;
+}
+
+.about .pkta {
+  font-size: clamp(26px, 3vw, 32px);
+  letter-spacing: .12em;
+  margin-bottom: 14px;
+}
+
+
+/* ------------------------------------
+   Members
+------------------------------------ */
+.member-list {
+  display: grid;
+  gap: 24px;
+}
+
+.member {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+
+  image-rendering: pixelated;
+  border-radius: 12px;
+
+  object-fit: contain;
+  background: #ffffff;
+}
+
+.bio h3 {
+  font-size: 18px;
+  margin: .2em 0 .5em;
+}
+
+.bio p {
+  color: var(--ink-dim);
+  margin-bottom: 10px;
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* PCでは2カラムで横並び */
+@media (min-width: 768px) {
+  .member-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ------------------------------------
+   Chip ボタン（ホバーで色反転＋画像も反転）
+------------------------------------ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 8px 12px;
+
+  text-decoration: none;
+  color: #ffffff;
+  background: #000000;
+
+  border: 1px solid #000000;
+  border-radius: 999px;
+
+  transition: background .18s ease,
+              color .18s ease,
+              border-color .18s ease,
+              filter .18s ease;
+}
+
+.chip img {
+  height: 20px;
+  display: inline-block;
+  filter: none;
+  transition: filter .18s ease;
+}
+
+.chip:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #a5a5a5;
+}
+
+.chip:hover img {
+  filter: invert(1);
+}
+
+/* ------------------------------------
+   フッター
+------------------------------------ */
+.site-footer {
+  text-align: center;
+  color: #666;
+  padding:30px ;
+  background-color: #000;
+  color: #fff;
+}
+
+.site-footer .note {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.site-footer {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+
+/* ------------------------------------
+   ハンバーガーパネル
+------------------------------------ */
+.nav-panel {
+  position: fixed;
+  inset: 0 0 0 auto;
+
+  width: min(84vw, 360px);
+
+  background: var(--panel);
+  color: #fff;
+
+  transform: translateX(100%);
+  transition: transform .28s ease;
+
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-panel[aria-hidden="false"] {
+  transform: translateX(0);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 18px;
+
+  border-bottom: 1px solid #222;
+}
+
+.panel-header img {
+  height: 40px;
+}
+
+.close {
+  font-size: 32px;
+
+  border: 0;
+  background: transparent;
+  color: #fff;
+
+  cursor: pointer;
+}
+
+.panel-nav {
+  padding: 8px 18px 24px;
+  display: grid;
+  gap: 18px;
+  font-family: "MOTHER PIXEL2", "PixelMplus", monospace;
+}
+
+
+.panel-link {
+  color: #fff;
+  text-decoration: none;
+
+  font-size: 18px;
+  padding: 10px 0;
+
+  border-bottom: 1px solid #333;
+}
+
+/* 背景の暗幕 */
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,.4);
+  z-index: 90;
+}
+
+/* ------------------------------------
+   スクロール表示（下からフェードイン）
+   少し速め：200ms
+------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .20s ease-out, transform .20s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ------------------------------------
+   Flow（作成の流れ）
+------------------------------------ */
+.flow {
+  text-align: center;
+}
+
+.flow .section-title {
+  font-weight: 700;
+}
+
+.flow-rule {
+  width: 160px;
+  height: 2px;
+  background: #111;
+  margin: 10px auto 24px;
+  opacity: .2;
+}
+
+.flow-steps {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink);
+}
+
+.flow-step {
+  width: min(720px, 92vw);
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.06);
+  padding: clamp(18px, 4vw, 28px);
+}
+
+.flow-step p {
+  margin: 0;
+  line-height: 1.9;
+}
+
+.flow-step small {
+  color: var(--ink-dim);
+}
+
+.flow-arrow {
+  color: #111;
+  opacity: .7;
+}
+
+/* PCでの余白をわずかに広げる */
+@media (min-width: 768px) {
+  .flow-steps { gap: 22px; }
+}
+
+/* Googleフォームのレスポンシブ枠 */
+.flow-form {
+  width: min(860px, 100%);
+  margin: 120px auto 0;
+}
+
+.flow-form iframe {
+  width: 100%;
+  height: clamp(600px, 100vw, 2500px); 
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* タブレット以下で高さを拡張 */
+@media (max-width: 1024px) {
+  .flow-form iframe {
+    height: 1400px;
+  }
+}
+
+/* スマホでさらに縦長に */
+@media (max-width: 768px) {
+  .flow-form iframe {
+    height: 1800px;
+  }
+}
+
+/* ------------------------------------
+   Flow用キービジュアル
+------------------------------------ */
+.flow-hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: calc(var(--section-space) * 0.6) auto 40px;
+}
+
+.flow-hero img {
+  display: block;
+  width: 70%;
+  height: auto;
+  max-width: 720px;
+  object-fit: contain;
+  object-position: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .flow-hero img {
+    width: 90%;
+    max-width: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ロゴ横に配置 */
+.header-start { display:flex; align-items:center; gap:12px; }
+
+/* 言語ボタン最小 */
+.lang-switch { display:flex; gap:8px; }
+.lang-switch button{
+  padding:6px 10px; border:1px solid #ddd; background:#fff; cursor:pointer;
+  border-radius:6px; font-family:inherit;
+}
+.lang-switch button[aria-current="true"]{ border-color:#000; font-weight:700; }
+
+/* 言語別KV画像（PC/SP） */
+html[lang="en"] .kv::before{ background-image:url(img/kv_en_pc.jpg); }
+@media (max-width:768px){
+  html[lang="en"] .kv::before{ background-image:url(img/kv_en_sp.jpg); }
+}
+
+
+@media (max-width: 768px) {
+  .flow.section {       
+    padding-top: 30px;  
+  }
+  .flow-hero {         
+    margin: 50px auto 12px;
+  }
+}

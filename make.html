@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PKTA | ステッカーブース</title>
+
+  <!-- 本文用：モダンで読みやすい日本語ゴシック -->
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="./img/favicon.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="./img/favicon.png" sizes="16x16" type="image/png">
+
+  <meta property="og:title" content="PKTA | ステッカーブース">
+  <meta property="og:description" content="篝火#14でオリジナルステッカーを作れるブース PKTA。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://あなたのドメイン/">
+  <meta property="og:image" content="https://あなたのドメイン/img/ogp.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://あなたのドメイン/img/ogp.jpg">
+</head>
+
+<body>
+  <!-- ========== Header ========== -->
+  <header class="site-header">
+    <div class="header-start">
+      <a class="logo" href="index.html">
+        <img src="img/PKTAlogo.png" alt="PKTA ロゴ">
+      </a>
+      <nav class="lang-switch">
+        <button data-lang="ja" aria-label="日本語">日本語</button>
+        <button data-lang="en" aria-label="English">English</button>
+      </nav>
+    </div>
+
+    <button class="burger" id="burger" aria-label="メニューを開く" aria-controls="navPanel" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ========== Flow 用キービジュアル ========== -->
+  <section class="flow-hero">
+    <img src="img/おいそぎメニュー.png" alt="ステッカー作成のイメージ">
+  </section>
+
+  <!-- ========== ステッカー作成の流れ ========== -->
+  <section id="flow" class="flow section reveal">
+    <h2 class="section-title" data-i18n="flow.title">ステッカー　さくせいのながれ</h2>
+    <div class="flow-rule" aria-hidden="true"></div>
+
+    <ol class="flow-steps" role="list">
+      <li class="flow-step">
+        <p data-i18n="flow.step1">
+          Googleフォームで作りたいステッカーのイメージを入力。<br>
+          もちろん現地ブースに直接来ていただいてもOK！<br>
+        </p>
+        <small data-i18n="flow.note1">※現地ブースとは、2025年11月2日,3日の篝火#14 PKTAブースを指します</small>
+      </li>
+
+      <li class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+          <path d="M6.7 8.7a1 1 0 0 1 1.4 0L12 12.6l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.1a1 1 0 0 1 0-1.4z"/>
+        </svg>
+      </li>
+
+      <li class="flow-step">
+        <p data-i18n="flow.step2">ブース現地に向かい、ブーススタッフと一緒にデザイン。</p>
+      </li>
+
+      <li class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+          <path d="M6.7 8.7a1 1 0 0 1 1.4 0L12 12.6l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.1a1 1 0 0 1 0-1.4z"/>
+        </svg>
+      </li>
+
+      <li class="flow-step">
+        <p data-i18n="flow.step3">
+          スタッフが印刷裁断して、ステッカーを受け渡し。<br>
+          <small data-i18n="flow.note2">※一定枚数溜まってから印刷を行うので、少々お時間を頂く場合がございます。</small>
+        </p>
+      </li>
+    </ol>
+
+    <!-- Googleフォーム（URL差し替え） -->
+    <div class="flow-form">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLScWdij6XRhonTnjiK2EFjWFqtAWG5D8mTrA-fOKmbxZ2_4wRg/viewform?embedded=true"
+        title="ステッカー申込フォーム"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ========== Footer ========== -->
+  <footer class="site-footer reveal">
+    <small>© 2025 Sticker Project PKTA</small>
+    <p class="note">本サイトは非営利にて運営されています。</p>
+  </footer>
+
+  <!-- ========== ハンバーガーパネル ========== -->
+  <aside id="navPanel" class="nav-panel" aria-hidden="true">
+    <div class="panel-header">
+      <a href="index.html"><img src="img/PKTAlogo.png" alt="PKTA ロゴ"></a>
+      <button class="close" id="closePanel" aria-label="メニューを閉じる">×</button>
+    </div>
+    <nav class="panel-nav">
+      <a href="make.html" class="panel-link" data-i18n="nav.make">ステッカーをつくる</a>
+      <a href="https://discord.gg/qgZQDHp59u" class="panel-link" data-i18n="nav.post">イラストをとうこうする</a>
+      <a href="index.html#about" class="panel-link" data-i18n="nav.about">PKTAとは？</a>
+      <a href="index.html#members" class="panel-link" data-i18n="nav.members">メンバー しょうかい</a>
+    </nav>
+  </aside>
+
+  <div id="overlay" class="overlay" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
