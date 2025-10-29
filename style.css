@@ -21,7 +21,7 @@ html, body {
 ------------------------------------ */
 @font-face {
   font-family: "MOTHER PIXEL2";
-  src: url("./fonts/MOTHERPIXEL2.otf") format("opentype"),
+  src: url("./fonts/MOTHERPIXEL2.woff2") format("woff2"),
        url("./fonts/MOTHERPIXEL2.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
@@ -82,7 +82,8 @@ h4 {
 
   --radius: 14px;
 
-    --section-space: 80px;
+  --section-space: 100px;
+  --header-h: 52px; /* いまの固定ヘッダーの高さ */
 }
 
 /* ------------------------------------
@@ -93,8 +94,10 @@ body {
   background: var(--bg);
   line-height: 1.8;
   letter-spacing: .02em;
-  padding-top: 52px;
+  padding-top: var(--header-h); 
 }
+
+
 /* ------------------------------------
    ヘッダー
 ------------------------------------ */
@@ -153,26 +156,27 @@ body {
   position: relative;
   overflow: hidden;
 
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-
-  background: #fff; /* 最初は白 */
+  /* 高さは画面サイズに依存しない。画像の比率で決める */
+  width: 100%;
+  aspect-ratio: 16 / 7; 
+  background: #fff;
 }
 
-/* 背景画像レイヤー：最初は非表示 → 徐々に表示 */
 .kv::before {
   content: "";
   position: absolute;
   inset: 0;
 
-  background-image: url(img/kv_kari_pc.jpg); /* PC用 */
-  background-size: cover;
-  background-position: center;
+  background-image: url(img/kv_kari_pc.jpg);
+  background-size: cover;           
+  background-repeat: no-repeat;
+  background-position: center top;  /* ← 上を優先してトリミング */
+  background-color: #fff;
 
   opacity: 0;
-  animation: kvBgFade 3.0s ease-out forwards; /* ゆっくり */
+  animation: kvBgFade 3.0s ease-out forwards;
 }
+
 
 /* スマホで画像差し替え */
 @media (max-width: 768px) {
@@ -668,5 +672,16 @@ html[lang="en"] .kv::before{ background-image:url(img/kv_en_pc.jpg); }
   }
   .flow-hero {         
     margin: 50px auto 12px;
+  }
+}
+
+/* スマホ用 */
+@media (max-width: 768px) {
+  .kv {
+    aspect-ratio: 3 / 4; /* 縦長画像ならここも変更 */
+  }
+
+  .kv::before {
+    background-image: url(img/kv_kari_sp.jpg);
   }
 }
