@@ -693,64 +693,65 @@ html[lang="en"] .kv::before{ background-image:url(img/kv_en_pc.jpg); }
 }
 
 
-@media (max-width: 768px) {
-  .flow.section {       
-    padding-top: 30px;  
-  }
-  .flow-hero {         
-    margin: 50px auto 12px;
-  }
-}
-
-/* スマホ用 */
-@media (max-width: 768px) {
-  .kv {
-    aspect-ratio: 3 / 4; /* 縦長画像ならここも変更 */
-  }
-
-  .kv::before {
-    background-image: url(img/kv_kari_sp.jpg);
-  }
-}
-
-#make {
-  padding-top: 50px;
-}
-
-@media (max-width: 768px) {
-  /* kvをスマホ幅にぴったり合わせる */
-  .kv,
-  .kv::before {
-    width: 100vw;
-    background-size: cover; /* 横幅ぴったりで全画面にフィット */
-    background-position: center top;
-  }
-
-  /* h2の囲み下に余白を追加 */
-  h2 {
-    padding-bottom: 10px;
-    margin-bottom: 24px; /* 囲みと次の要素の間に余白を作る */
-  }
-}
-
+/* ===============================
+   スマホ版まとめ
+=============================== */
 @media (max-width: 768px) {
   /* 横スクロール防止 */
   html, body {
     overflow-x: hidden;
   }
 
-  /* kvをスマホ幅にぴったりフィット（はみ出し防止版） */
+  /* KV（縦長・横幅ぴったり） */
+  .kv {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    max-width: 100%;
+    min-height: calc(100svh - var(--header-h));
+  }
+  .kv::before {
+    background-image: url(img/kv_kari_sp.jpg);
+    background-size: cover;
+    background-position: center top;
+    background-color: #fff;
+  }
+
+  /* 英語版KV */
+  html[lang="en"] .kv::before {
+    background-image: url(img/kv_en_sp.jpg);
+  }
+
+  /* Flowセクション（余白調整） */
+  .flow.section {
+    padding-top: 30px;
+  }
+  .flow-hero {
+    margin: 50px auto 12px;
+  }
+
+  /* h2見出し余白 */
+  h2 {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+
+  /* おいそぎメニュー上マージン */
+  #make {
+    padding-top: 50px;
+  }
+}
+
+/* ===============================
+   PC版（横幅ぴったり）
+=============================== */
+@media (min-width: 769px) {
   .kv,
   .kv::before {
     width: 100%;
     max-width: 100%;
+  }
+  .kv::before {
     background-size: cover;
     background-position: center top;
-  }
-
-  /* h2の囲み下に余白を追加（調整済み） */
-  h2 {
-    padding-bottom: 10px;
-    margin-bottom: 20px;
   }
 }
