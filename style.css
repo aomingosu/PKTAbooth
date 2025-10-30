@@ -83,7 +83,7 @@ h4 {
   --radius: 14px;
 
   --section-space: 100px;
-  --header-h: 52px; /* いまの固定ヘッダーの高さ */
+  --header-h: 52px; 
 }
 
 /* ------------------------------------
@@ -95,8 +95,9 @@ body {
   line-height: 1.8;
   letter-spacing: .02em;
   padding-top: var(--header-h); 
+    font-family: "Zen Kaku Gothic New", system-ui, -apple-system,
+               "Hiragino Sans", "Noto Sans JP", "Segoe UI", sans-serif;
 }
-
 
 /* ------------------------------------
    ヘッダー
@@ -152,37 +153,63 @@ body {
 /* ------------------------------------
    KV（白から画像へフェード）
 ------------------------------------ */
+/* まずPC共通：画面高に合わせてカバー */
 .kv {
   position: relative;
   overflow: hidden;
-
-  /* 高さは画面サイズに依存しない。画像の比率で決める */
   width: 100%;
-  aspect-ratio: 16 / 7; 
+  min-height: calc(100svh - var(--header-h));
   background: #fff;
 }
-
 .kv::before {
   content: "";
   position: absolute;
   inset: 0;
-
   background-image: url(img/kv_kari_pc.jpg);
-  background-size: cover;           
+  background-size: contain;      /* ← ここを cover から contain に変更 */
+  background-position: center top;
   background-repeat: no-repeat;
-  background-position: center top;  /* ← 上を優先してトリミング */
-  background-color: #fff;
-
+  background-color: #fff;        /* ← 余白の背景を白で固定 */
   opacity: 0;
-  animation: kvBgFade 3.0s ease-out forwards;
+  animation: kvBgFade 3s ease-out forwards;
 }
 
-
-/* スマホで画像差し替え */
+/* スマホ版 */
 @media (max-width: 768px) {
   .kv::before {
     background-image: url(img/kv_kari_sp.jpg);
+    background-size: contain;    /* ← 下が切れないよう contain のまま */
+    background-position: center top;
+    background-color: #fff;
   }
+}
+
+/* 英語版 */
+html[lang="en"] .kv::before {
+  background-image: url(img/kv_en_pc.jpg);
+}
+@media (max-width: 768px) {
+  html[lang="en"] .kv::before {
+    background-image: url(img/kv_en_sp.jpg);
+  }
+}
+
+
+/* SPは“切らずに”見せたいので contain に切替 */
+@media (max-width:768px){
+  .kv{ min-height: calc(100svh - var(--header-h)); }
+  .kv::before{
+    background-image:url(img/kv_kari_sp.jpg);
+    background-size: contain;       /* 全体を収める（上下に余白が出る場合あり） */
+    background-position: center top;
+    background-color:#fff;          /* 余白の色 */
+  }
+}
+
+/* 英語版画像の差し替え（既存の指定はそのまま活かしてOK） */
+html[lang="en"] .kv::before{ background-image:url(img/kv_en_pc.jpg); }
+@media (max-width:768px){
+  html[lang="en"] .kv::before{ background-image:url(img/kv_en_sp.jpg); }
 }
 
 /* テキストは前面に */
@@ -684,4 +711,8 @@ html[lang="en"] .kv::before{ background-image:url(img/kv_en_pc.jpg); }
   .kv::before {
     background-image: url(img/kv_kari_sp.jpg);
   }
+}
+
+#make {
+  padding-top: 0px;
 }
