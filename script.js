@@ -142,3 +142,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 /* === i18n: ここまで追加 === */
+
+function applyLang(lang) {
+  const dict = I18N[lang] || I18N.ja;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    // 子孫にも data-i18n がある場合は、この要素は上書きしない
+    const hasNested = el.querySelector("[data-i18n]") !== null;
+    if (hasNested) return;
+
+    const key = el.getAttribute("data-i18n");
+    const html = dict[key];
+    if (html != null) el.innerHTML = html;
+  });
+
+  document.documentElement.setAttribute("lang", lang);
+  localStorage.setItem("lang", lang);
+  document.querySelectorAll('.lang-switch button')
+    .forEach(b => b.setAttribute('aria-current', b.dataset.lang === lang ? 'true' : 'false'));
+}
